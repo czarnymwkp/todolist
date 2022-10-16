@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css'
+import Main from './components/Main'
+
+import TopDiv from './style/StyledMain'
+import MainDiv from './style/StyledDoneList'
+import ToDoComponent from './components/ToDoForm'
+
+import { ToDoContext, contextToDo } from './context/ToDoContext'
+
+const App: React.FC = () => {
+	const input = contextToDo.input
+	const status = contextToDo.status
+	const toDoList = contextToDo.toDoList
+	const id = contextToDo.id
+
+	return (
+		<>
+			<ToDoContext.Provider value={{ input, status, toDoList, id }}>
+				<TopDiv>
+					<ToDoComponent />
+				</TopDiv>
+			</ToDoContext.Provider>
+		</>
+	)
 }
 
-export default App;
+export default App
