@@ -5,6 +5,9 @@ const TopDiv = styled.div`
 	flex-direction: column;
 	background-color: lightblue;
 	justify-content: center;
+	align-items: center;
 	padding: 100px;
 `
+
+
 export default TopDiv

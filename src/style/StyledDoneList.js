@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 
-const MainDiv = styled.div`
-	display: flex;
-	min-height: 50vh;
-	background-color: lightgray;
-	width: 100%;
-	justify-items: center;
-	align-items: center;
-	flex-direction: column;
-	padding-top: 100px;
-	
+const StyledButton = styled.button`
+	background-color: darkblue;
+	color: white;
+	width: 100px;
+	margin: 10px;
+	border-radius: 15px;
 `
-export default MainDiv
+export default StyledButton

@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 
 import './App.css'
-import Main from './components/Main'
 
 import TopDiv from './style/StyledMain'
-import MainDiv from './style/StyledDoneList'
 import ToDoComponent from './components/ToDoForm'
 
 import { ToDoContext, contextToDo } from './context/ToDoContext'

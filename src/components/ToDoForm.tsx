@@ -2,6 +2,8 @@ import React, { FC, ChangeEvent, MouseEvent } from 'react'
 import { useState } from 'react'
 
 import { IQuest, IPrev } from '../interface/interface'
+import ButtonX from './Button'
+import ButtonV from './ButtonV'
 
 localStorage.setItem('name', 'lucas')
 
@@ -12,28 +14,22 @@ const ToDoComponent: FC = () => {
 	const [input, setInput] = useState<string>('')
 	const [toDoList, setToDoList] = useState<IQuest[]>([])
 	const [status, setStatus] = useState(Boolean)
-	const [nameLogin, setNameLogin] = useState<String>('')
-	const [questNumber, setQuestNumber] = useState(Number)
+	const [id, setQuestNumber] = useState(Number)
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setInput(event.target.value)
 	}
-	const nameHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setNameLogin(event.target.value)
-	}
 
 	const questOnClick = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		const newTask = { taskName: input, isAdd: status, id: questNumber }
+		const newTask = { taskName: input, isAdd: status, id: id }
 		setToDoList([...toDoList, newTask])
 		setInput('')
 		setStatus(true)
+		setQuestNumber(prevState => prevState + 1)
 		console.log(toDoList)
 	}
-	const nameOnClick = (event: MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault()
-		const userNameLogin = nameLogin
-	}
+
 	const questClickStatus = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		setToDoList([])
@@ -45,12 +41,8 @@ const ToDoComponent: FC = () => {
 				<h1>Witam w aplikacji To Do</h1>
 				<br />
 				<br />
-				<input id='task' type='text' placeholder='Wpisz swoje imię' onChange={nameHandleChange} />{' '}
-				<button onClick={nameOnClick}>Dodaj do bazy danych</button>
-				<br />
-				<br />
 				<input onChange={handleChange} type='text' placeholder='Wpisz zadanie do wykonania' value={input} name='text' />
-				<button onClick={questClickStatus}>Kasuj zadania</button>
+				<button onClick={questClickStatus}>Kasuj wszystkie zadania</button>
 				<button onClick={questOnClick}>Nowe zadanie</button>
 			</form>
 			<br />
@@ -58,15 +50,17 @@ const ToDoComponent: FC = () => {
 			<div>
 				{toDoList.map((input: IQuest) => {
 					return (
-						<>
-							<li>
-								{input.taskName}
-								{input.isAdd}
-								<button>V</button>
-								<button>X</button>
-							</li>
-						</>
+					
+							<div key={input.id}>							
+									{input.taskName}
+									{input.isAdd}
+									<ButtonV></ButtonV>
+									<ButtonX></ButtonX>
+								
+							</div>
+						
 					)
+					console.log(input.id)
 				})}
 			</div>
 		</>
