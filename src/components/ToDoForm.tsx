@@ -1,16 +1,35 @@
 import React, { FC, ChangeEvent, MouseEvent } from 'react'
-import { useState } from 'react'
+import { useState, useReducer } from 'react'
 
 import { IQuest, IPrev } from '../interface/interface'
 import ButtonX from './Button'
 import ButtonV from './ButtonV'
+import StyledDiv from '../style/StyledDiv'
+
+interface State {
+	input: string
+	toDoList: []
+	status: boolean
+	id: number
+}
 
 localStorage.setItem('name', 'lucas')
 
 const element = localStorage.getItem('name')
 console.log(element)
 
+function reducer() {}
+
+const initialState: State = {
+	input: '',
+	toDoList: [],
+	status: true,
+	id: 0,
+}
+
 const ToDoComponent: FC = () => {
+	// const [{input, toDoList, status, id}, dispach] = useReducer(reducer, initialState)
+
 	const [input, setInput] = useState<string>('')
 	const [toDoList, setToDoList] = useState<IQuest[]>([])
 	const [status, setStatus] = useState(Boolean)
@@ -35,6 +54,12 @@ const ToDoComponent: FC = () => {
 		setToDoList([])
 		setStatus(prevState => !prevState)
 	}
+
+	function handleRemove(id: number) {
+		const newList = toDoList.filter(item => item.id !== id)
+		setToDoList(newList)
+	}
+
 	return (
 		<>
 			<form action=''>
@@ -48,17 +73,17 @@ const ToDoComponent: FC = () => {
 			<br />
 			<div>ZADANIA DO WYKONANIA</div>
 			<div>
-				{toDoList.map((input: IQuest) => {
+				{toDoList.map(input => {
 					return (
-					
-							<div key={input.id}>							
-									{input.taskName}
-									{input.isAdd}
-									<ButtonV></ButtonV>
-									<ButtonX></ButtonX>
-								
+						<StyledDiv>
+							<div key={input.id}>
+								{input.taskName}
+								{input.isAdd}
+								<button onClick={() => handleRemove(input.id)}>Usuń zadanie</button>
+								<ButtonV></ButtonV>
+								<ButtonX></ButtonX>
 							</div>
-						
+						</StyledDiv>
 					)
 					console.log(input.id)
 				})}
