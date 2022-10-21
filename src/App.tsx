@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './App.css'
 
 import TopDiv from './style/StyledMain'
-import ToDoComponent from './components/ToDoForm'
+import ToComponent from './components/todoforms'
 
 import { ToDoContext, contextToDo } from './context/ToDoContext'
 
@@ -17,7 +17,7 @@ const App: React.FC = () => {
 		<>
 			<ToDoContext.Provider value={{ input, status, toDoList, id }}>
 				<TopDiv>
-					<ToDoComponent />
+					<ToComponent />
 				</TopDiv>
 			</ToDoContext.Provider>
 		</>

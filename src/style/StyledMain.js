@@ -7,6 +7,7 @@ const TopDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 100px;
+	height: 80vh;
 `
 
 
